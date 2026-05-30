@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OPRT Sales Script — Outdoor Event</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    padding: 1rem;
+    max-width: 680px;
+    margin: 0 auto;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  header {
+    padding: 1.25rem 0 1rem;
+    border-bottom: 1px solid #e0ddd5;
+    margin-bottom: 1.25rem;
+  }
+
+  header h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 3px;
+  }
+
+  header p {
+    font-size: 13px;
+    color: #888;
+  }
+
+  .expand-btn {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 12px;
+    color: #555;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 4px 12px;
+    cursor: pointer;
+  }
+
+  .expand-btn:hover { background: #f0ede8; }
+
+  .section {
+    background: #fff;
+    border: 1px solid #e0ddd5;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    background: #faf9f6;
+    gap: 10px;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .section-header:hover { background: #f0ede8; }
+  .section-header:active { background: #e8e4dc; }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .tag-open     { background: #e6f4ec; color: #2d7a4f; }
+  .tag-pain     { background: #fef3e2; color: #a05a00; }
+  .tag-pitch    { background: #e8f0fe; color: #1a56c4; }
+  .tag-close    { background: #fde8e8; color: #b52b2b; }
+  .tag-objection{ background: #f0f0f0; color: #555; }
+  .tag-hold     { background: #e8f0fe; color: #1a56c4; }
+  .tag-reinforce{ background: #e6f4ec; color: #2d7a4f; }
+  .tag-followup { background: #f3e8fe; color: #6b21a8; }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1a1a1a;
+    line-height: 1.3;
+  }
+
+  .chevron {
+    font-size: 18px;
+    color: #aaa;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .chevron.open { transform: rotate(180deg); }
+
+  .section-body {
+    display: none;
+    padding: 1rem;
+    border-top: 1px solid #e8e4dc;
+  }
+
+  .section-body.open { display: block; }
+
+  .note {
+    font-size: 12px;
+    color: #777;
+    font-style: italic;
+    margin-bottom: 12px;
+    padding: 7px 10px;
+    background: #f7f6f2;
+    border-left: 2px solid #ccc;
+  }
+
+  .line { margin-bottom: 14px; }
+  .line:last-child { margin-bottom: 0; }
+
+  .speaker {
+    font-size: 10px;
+    font-weight: 700;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 5px;
+  }
+
+  .speech {
+    font-size: 15px;
+    color: #1a1a1a;
+    line-height: 1.65;
+    padding: 10px 14px;
+    background: #f7f6f2;
+    border-radius: 8px;
+  }
+
+  .speech em {
+    color: #888;
+    font-style: italic;
+  }
+
+  .tip {
+    font-size: 12px;
+    color: #888;
+    margin-top: 8px;
+    font-style: italic;
+  }
+
+  .objection-item {
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #ece9e2;
+  }
+
+  .objection-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .objection-trigger {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 8px;
+  }
+
+  .followup-item {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #ece9e2;
+  }
+
+  .followup-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .followup-day {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6b21a8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+
+  footer {
+    text-align: center;
+    font-size: 11px;
+    color: #bbb;
+    padding: 1.5rem 0 2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Outdoor event — form submission</h1>
+  <p>Inbound lead · B2C · standard event</p>
+  <button class="expand-btn" onclick="toggleAll()">Expand all</button>
+</header>
+
+<!-- OPENING -->
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-label">
+      <span class="tag tag-open">Opening</span>
+      <span class="section-title">Call the lead — demonstrate you read the form</span>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="section-body">
+    <div class="note">Never open with "Is this [name]?" — that puts you on defense immediately.</div>
+    <div class="line">
+      <div class="speaker">Scott</div>
+      <div class="speech">"[Name]? — <em>pause</em> — This is Scott with Old Pueblo Restroom Trailers. I saw you're looking at a trailer for your [event type] on [date] — [guest count] guests. I just wanted to reach out before that date gets taken. Did I catch you at an okay time?"</div>
+    </div>
+    <div class="line">
+      <div class="speaker">Scott — after they respond</div>
+      <div class="speech">"Perfect. Tell me a little more about what you've got planned — is this at your home, a venue, that kind of thing?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- PAST PAIN -->
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-label">
+      <span class="tag tag-pain">Past pain</span>
+      <span class="section-title">Let them sell themselves</span>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="section-body">
+    <div class="note">Don't assume they've had a bad experience. Ask — if they have a story, they'll tell it and do the work for you.</div>
+    <div class="line">
+      <div class="speaker">Scott</div>
+      <div class="speech">"Have you been to an outdoor event where the restroom situation wasn't great — porta-potties, long lines, that kind of thing? What was that like?"</div>
+    </div>
+    <div class="line">
+      <div class="speaker">Scott — after they respond</div>
+      <div class="speech">"Yeah. That's exactly what we make sure doesn't happen at your event."</div>
+    </div>
+  </div>
+</div>
+
+<!-- PITCH -->
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-label">
+      <span class="tag tag-pitch">Pitch</span>
+      <span class="section-title">Outcomes only — under 90 seconds</span>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="section-body">
+    <div class="note">Sell Maui, not the plane ride. Outcomes, not features. Then stop talking.</div>
+    <div class="line">
+      <div class="speaker">Scott</div>
+      <div class="speech">"Here's what we do. We bring a luxury trailer — flushing toilets, running water, AC, real lighting. Your guests walk in and it feels like part of the venue. Nobody's thinking about the bathroom, which means the only thing they remember is your event.<br><br>We handle delivery, setup, and pickup. You make one call. That piece of your day is handled."</div>
+    </div>
+    <p class="tip">Pause. Let it land. Don't fill the silence.</p>
+  </div>
+</div>
+
+<!-- ASK -->
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-label">
+      <span class="tag tag-close">Ask</span>
+      <span class="section-title">Quote and ask for the booking</span>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="section-body">
+    <div class="note">State the price confidently. Don't hedge. Ask what questions they have — don't ask if they want to book.</div>
+    <div class="line">
+      <div class="speaker">Scott</div>
+      <div class="speech">"Based on what you've told me, I think we're a great fit for your event. For [guest count] guests we're at $1,200 — delivery, setup, and pickup all in. I can hold your date right now. What questions do you have before we get that locked in?"</div>
+    </div>
+  </div>
+</div>
+
+<!-- OBJECTIONS -->
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-label">
+      <span class="tag tag-objection">Objections</span>
+      <span class="section-title">Common stalls and how to handle them</span>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="section-body">
+
+    <div class="objection-item">
+      <div class="objection-trigger">&#x1F4AC; "That's more than I expected"</div>
+      <div class="speech">"Totally fair — what were you expecting to spend?"<br><br><em>[They answer]</em><br><br>"Got it. If ours was the same price as whatever else you've looked at, which would you go with — and why?"<br><br><em>[They tell you why they prefer yours. Then:]</em><br><br>"Right — that's the difference. You already know it."</div>
+    </div>
+
+    <div class="objection-item">
+      <div class="objection-trigger">&#x1F4AC; "I need to think about it" / "I need to talk to my partner"</div>
+      <div class="speech">"Of course. Out of curiosity, what do you think their main concern would be?"<br><br><em>[Work through the real objection, not the stall. Then:]</em><br><br>"What would make it easy to have that conversation? I can send you everything so you've got it in one place."</div>
+    </div>
+
+    <div class="objection-item">
+      <div class="objection-trigger">&#x1F4AC; "We were just going to use the inside bathroom"</div>
+      <div class="speech">"Is the house set up to handle [guest count] guests cycling through one bathroom all night without a line? Some houses are totally fine — others it becomes the thing everyone remembers. What's your gut on it?"</div>
+      <p class="tip">Don't argue. Let them think it through themselves.</p>
+    </div>
+
+    <div class="objection-item">
+      <div class="objection-trigger">&#x1F4AC; "We were thinking porta-potties"</div>
+      <div class="speech">"Have you been to an event where that was the setup? What was it like?"<br><br><em>[If they have a story, they'll sell themselves. If not:]</em><br><br>"The difference for your guests is real — especially in the summer heat. They walk into a porta-potty and they're thinking about getting out. They walk into ours and they forget they're at an outdoor event. That's the version you want."</div>
+    </div>
+
+    <div class="objection-item">
+      <div class="objection-trigger">&#x1F4AC; Any hesitation on price</div>
+      <div class="speech">"What is it specifically that's making the price feel tight right now?"</div>
+      <p class="tip">Listen. Don't defend yet. The answer tells you what to address.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- DATE HOLD -->
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-label">
+      <span class="tag tag-hold">Date hold</span>
+      <span class="section-title">Offer proactively if they're hesitating</span>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="section-body">
+    <div class="note">You have one trailer. A held date that doesn't convert is a real cost. Give them a short window — creates urgency without pressure, and pushes toward the deposit as the real commitment.</div>
+    <div class="line">
+      <div class="speaker">Scott</div>
+      <div class="speech">"I can hold your date for 48 hours — no deposit yet. After that I have to open it back up. If you want to lock it in for good, the deposit takes care of that today."</div>
+    </div>
+    <p class="tip">Warm lead who needs to check with a partner → 48-hour hold is fair. Cold lead just window shopping → they won't take the hold seriously anyway. Either way, push toward the deposit as the real lock.</p>
+  </div>
+</div>
+
+<!-- REINFORCE -->
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-label">
+      <span class="tag tag-reinforce">Reinforce</span>
+      <span class="section-title">After deposit — confirm next steps</span>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="section-body">
+    <div class="note">Most salespeople stop here. Don't. Reinforce the decision and set the next step — they should never wonder what happens next.</div>
+    <div class="line">
+      <div class="speaker">Scott</div>
+      <div class="speech">"[Name], you made a great call. A lot of people try to cut corners on this and their guests always notice. You made sure they won't.<br><br>Here's what happens next — I'll send over the rental agreement and deposit instructions. Once that's in, your date is locked. Any questions before I do that?"</div>
+    </div>
+    <p class="tip">BAMFAM — every call ends with a confirmed next step.</p>
+  </div>
+</div>
+
+<!-- VOICEMAIL -->
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-label">
+      <span class="tag tag-followup">Voicemail</span>
+      <span class="section-title">They didn't pick up — leave this</span>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="section-body">
+    <div class="note">Keep it under 20 seconds. No pitch. No price. The goal is a callback — nothing else. Sound relaxed, not desperate.</div>
+    <div class="line">
+      <div class="speaker">Scott</div>
+      <div class="speech">"Hey [Name], this is Scott with Old Pueblo Restroom Trailers. I saw you reached out about a trailer for your [event type] on [date] — I just wanted to make sure we got you taken care of before that date fills up. Give me a call back at (520) 975-1914. Talk soon."</div>
+    </div>
+    <p class="tip">Immediately after: send the Day 0 text below and log in HubSpot. Don't wait.</p>
+  </div>
+</div>
+
+<!-- FOLLOW-UP SEQUENCE -->
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-label">
+      <span class="tag tag-followup">Follow-up</span>
+      <span class="section-title">Left voicemail — Day 0 / 2 / 5 / 10</span>
+    </div>
+    <span class="chevron">&#8964;</span>
+  </div>
+  <div class="section-body">
+    <div class="note">Log every contact in HubSpot same day. No skipping, no delays.</div>
+
+    <div class="followup-item">
+      <div class="followup-day">Day 0 — same hour as voicemail</div>
+      <div class="speech">"Hey [Name], this is Scott with Old Pueblo Restroom Trailers — just tried you. Reaching out about your [event] on [date]. Give me a call back when you get a chance: (520) 975-1914."</div>
+      <p class="tip">Short. No pitch in the text. Goal is just a callback.</p>
+    </div>
+
+    <div class="followup-item">
+      <div class="followup-day">Day 2 — no response</div>
+      <div class="speech">"Hey [Name], Scott again with Old Pueblo. Still have your date open — wanted to make sure you got my message. (520) 975-1914."</div>
+      <p class="tip">No apology for following up. No "just checking in."</p>
+    </div>
+
+    <div class="followup-item">
+      <div class="followup-day">Day 5 — still no response</div>
+      <div class="speech">"Hey [Name] — Scott with Old Pueblo. Your date is still open but I can't hold it much longer. Worth a quick call if you're still interested: (520) 975-1914."</div>
+    </div>
+
+    <div class="followup-item">
+      <div class="followup-day">Day 10 — final touch</div>
+      <div class="speech">"Hey [Name], last reach out from Scott at Old Pueblo. If the timing isn't right, no worries — just let me know and I'll take you off my list. If you're still thinking about it, happy to talk: (520) 975-1914."</div>
+      <p class="tip">If no response after Day 10, move to 3–6 month check-in rotation in HubSpot.</p>
+    </div>
+
+  </div>
+</div>
+
+<footer>Old Pueblo Restroom Trailers · (520) 975-1914</footer>
+
+<script>
+function toggle(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chevron.classList.toggle('open', !isOpen);
+}
+
+function toggleAll() {
+  const bodies = document.querySelectorAll('.section-body');
+  const chevrons = document.querySelectorAll('.chevron');
+  const btn = document.querySelector('.expand-btn');
+  const anyOpen = [...bodies].some(b => b.classList.contains('open'));
+  bodies.forEach(b => b.classList.toggle('open', !anyOpen));
+  chevrons.forEach(c => c.classList.toggle('open', !anyOpen));
+  btn.textContent = anyOpen ? 'Expand all' : 'Collapse all';
+}
+</script>
+
+</body>
+</html>
