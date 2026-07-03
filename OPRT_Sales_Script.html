@@ -202,6 +202,33 @@
     font-style: italic;
   }
 
+  .copy-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .copy-row .speech {
+    flex: 1;
+  }
+
+  .copy-btn {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: #555;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+
+  .copy-btn:hover { background: #f0ede8; }
+  .copy-btn.copied { background: #e6f4ec; color: #2d7a4f; border-color: #cfe8da; }
+
   .tip {
     font-size: 12px;
     color: #888;
@@ -289,7 +316,7 @@
       <div class="note">Familiar tone with a pause — sounds like you know them. No "is this a good time" — it just invites no. Company name is fine; they need to know who's calling.</div>
       <div class="line">
         <div class="speaker">Scott</div>
-        <div class="speech">"[Name]? — <em>pause</em> — This is Scott with Old Pueblo Restroom Trailers. I saw you're looking at a trailer for your [event type] on [date]. Calling to make sure we get you squared away before that fills up."</div>
+        <div class="speech">"[Name]? — <em>pause</em> — This is Scott with Old Pueblo Restroom Trailers. I saw you're looking at a trailer for your [event type] on [date]. Calling to make sure we get you squared away."</div>
       </div>
       <div class="line">
         <div class="speaker">Scott — after they respond</div>
@@ -314,7 +341,23 @@
       </div>
       <div class="line">
         <div class="speaker">Scott — after they respond</div>
-        <div class="speech">"Yeah. That's exactly what we make sure doesn't happen at your event."</div>
+        <div class="speech">Mirror back the specific thing they said, connect it to the outcome, then close with: "...and your guests are still taken care of in a clean, comfortable space." Reference what they actually told you before that line — don't skip straight to the payoff.</div>
+      </div>
+      <div class="objection-item">
+        <div class="objection-trigger">&#x1F4AC; "I don't want people in my house"</div>
+        <div class="speech">"Yeah, that's the exact reason people go this route — keeps your house off limits, and your guests are still taken care of in a clean, comfortable space."</div>
+      </div>
+      <div class="objection-item">
+        <div class="objection-trigger">&#x1F4AC; "We're on septic"</div>
+        <div class="speech">"Makes sense — a trailer takes that whole variable out of the equation, nothing running through your system, and your guests are still taken care of in a clean, comfortable space."</div>
+      </div>
+      <div class="objection-item">
+        <div class="objection-trigger">&#x1F4AC; "I don't want to clean up after people leave"</div>
+        <div class="speech">"Right, that's the piece most people don't think about until after the event — nothing in your house to deal with, and your guests are still taken care of in a clean, comfortable space."</div>
+      </div>
+      <div class="objection-item">
+        <div class="objection-trigger">&#x1F4AC; "We only have one bathroom"</div>
+        <div class="speech">"Yeah, one bathroom for a crowd is exactly where the bottleneck happens — this solves that, and your guests are still taken care of in a clean, comfortable space."</div>
       </div>
     </div>
   </div>
@@ -331,7 +374,7 @@
       <div class="note">Sell Maui, not the plane ride. Outcomes, not features. Then stop talking.</div>
       <div class="line">
         <div class="speaker">Scott</div>
-        <div class="speech">"Here's what we do. We bring a luxury trailer — flushing toilets, running water, AC, real lighting. Your guests walk in and it feels like a real bathroom. Nobody's thinking about the bathroom, which means the only thing they remember is your event.<br><br>We handle delivery, setup, and pickup. You make one call. That piece of your day is handled."</div>
+        <div class="speech">"Here's what we do. We bring a luxury trailer — flushing toilets, running water, AC, real lighting. Your guests walk in and it feels like a real bathroom. It's the one detail nobody notices when it's done right — and the one thing everybody remembers when it's not.<br><br>We handle delivery, setup, and pickup. Just tell me where you want it and I'll handle the rest."</div>
       </div>
       <p class="tip">Pause. Let it land. Don't fill the silence.</p>
     </div>
@@ -451,7 +494,10 @@
       <div class="note">Under 20 seconds. No pitch. Goal is a callback. Then send the Day 0 text immediately after.</div>
       <div class="line">
         <div class="speaker">Scott</div>
-        <div class="speech">"Hey [Name], this is Scott with Old Pueblo Restroom Trailers. I saw you reached out about a trailer for your [event type] on [date] — I just wanted to make sure we got you taken care of before that date fills up. Give me a call back at (520) 975-1914. Talk soon."</div>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name], this is Scott with Old Pueblo Restroom Trailers. I saw you reached out about a trailer for your [event type] on [date] — I just wanted to make sure we got you taken care of before that date fills up. Give me a call back at (520) 975-1914. Talk soon."</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name], this is Scott with Old Pueblo Restroom Trailers. I saw you reached out about a trailer for your [event type] on [date] — I just wanted to make sure we got you taken care of before that date fills up. Give me a call back at (520) 975-1914. Talk soon.">Copy</button>
+        </div>
       </div>
     </div>
   </div>
@@ -486,22 +532,33 @@
       <div class="note">Log every contact in HubSpot same day. No skipping, no delays.</div>
       <div class="followup-item">
         <div class="followup-day">Day 0 — same hour as voicemail</div>
-        <div class="speech">"Hey [Name], this is Scott, the owner of Old Pueblo Restroom Trailers. Just tried you. Reaching out about your [event] on [date]. Give me a callback when you get a chance."</div>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name], this is Scott, the owner of Old Pueblo Restroom Trailers. Just tried you. Reaching out about your [event] on [date]. Give me a callback when you get a chance."</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name], this is Scott, the owner of Old Pueblo Restroom Trailers. Just tried you. Reaching out about your [event] on [date]. Give me a callback when you get a chance.">Copy</button>
+        </div>
         <p class="tip">Short. No pitch. Goal is a callback.</p>
       </div>
       <div class="followup-item">
         <div class="followup-day">Day 2 — no response</div>
-        <div class="speech">"Hey [Name], Scott again with Old Pueblo. Still have your date open, wanted to make sure you got my message."</div>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name], Scott again with Old Pueblo. If it's easier to just handle this over text, I can do that too. Want me to send over the details?"</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name], Scott again with Old Pueblo. If it's easier to just handle this over text, I can do that too. Want me to send over the details?">Copy</button>
+        </div>
       </div>
       <div class="followup-item">
         <div class="followup-day">Day 5 — still no response</div>
-        <div class="speech">"Hey [Name], Scott with Old Pueblo. If it's easier to just handle this over text, I can do that too. Want me to send over the details?"</div>
-        <p class="tip">If they say yes, text them the price and a link to the agreement. No call needed.</p>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name], still haven't heard from you. How do you want to proceed from here?"</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name], still haven't heard from you. How do you want to proceed from here?">Copy</button>
+        </div>
       </div>
       <div class="followup-item">
         <div class="followup-day">Day 10 — no response</div>
-        <div class="speech">"Hey [Name], I've been trying to reach you and not hearing back. Still here if you need us, text, call, or email, whatever you like."</div>
-        <p class="tip">No response after Day 10 — move to nurture cadence in HubSpot. Reach back out at 30 days, then monthly until 6 weeks out, then tighten the cadence as the event approaches.</p>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name], not sure if you got abducted by aliens or just decided against it, but figured I'd check in one more time. Your date's still available."</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name], not sure if you got abducted by aliens or just decided against it, but figured I'd check in one more time. Your date's still available.">Copy</button>
+        </div>
+        <p class="tip">Only send this if the date is actually still open. Move to nurture cadence in HubSpot after this. Reach back out at 30 days, then monthly until 6 weeks out, then tighten the cadence as the event approaches.</p>
       </div>
     </div>
   </div>
@@ -518,21 +575,32 @@
       <div class="note">Quote is sent. Don't restate the price, the inclusions, or what you already said — they have it. Keep it a lean nudge. If they have a concern, the Day 2 question will surface it.</div>
       <div class="followup-item">
         <div class="followup-day">Day 0 — same day quote sent</div>
-        <div class="speech">"Hey [Name], sent over your quote. Let me know if anything looks off or if you have questions."</div>
+        <div class="copy-row">
+          <div class="speech">"Hi [Name], I sent over your quote for [event date]. It's $[amount] and it keeps your guests out of the house, using a real bathroom, and still comfortable for the whole event. A 25% deposit locks in your date. Reach out any time if you have questions."</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hi [Name], I sent over your quote for [event date]. It's $[amount] and it keeps your guests out of the house, using a real bathroom, and still comfortable for the whole event. A 25% deposit locks in your date. Reach out any time if you have questions.">Copy</button>
+        </div>
       </div>
       <div class="followup-item">
         <div class="followup-day">Day 2 — no response</div>
-        <div class="speech">"Hey [Name], tell me what your thoughts are on the quote."</div>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name], tell me what your thoughts are on the quote."</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name], tell me what your thoughts are on the quote.">Copy</button>
+        </div>
       </div>
       <div class="followup-item">
         <div class="followup-day">Day 5 — still no response</div>
-        <div class="speech">"Hey [Name], your date is still open. If it's easier to sort this over text, I can do that too, just say the word."</div>
-        <p class="tip">If they say yes, text them the price and a link to the agreement. No call needed.</p>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name], still haven't heard from you. How do you want to proceed from here?"</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name], still haven't heard from you. How do you want to proceed from here?">Copy</button>
+        </div>
       </div>
       <div class="followup-item">
         <div class="followup-day">Day 10 — no response</div>
-        <div class="speech">"Hey [Name], I've been trying to reach you and not hearing back. Still have your date open if you need us."</div>
-        <p class="tip">No response after Day 10 — move to nurture cadence in HubSpot. Reach back out at 30 days, then monthly until 6 weeks out, then tighten as the event approaches.</p>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name], not sure if you got abducted by aliens or just decided against it, but figured I'd check in one more time. Your date's still available."</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name], not sure if you got abducted by aliens or just decided against it, but figured I'd check in one more time. Your date's still available.">Copy</button>
+        </div>
+        <p class="tip">Only send this if the date is actually still open. Move to nurture cadence in HubSpot after this. Reach back out at 30 days, then monthly until 6 weeks out, then tighten as the event approaches.</p>
       </div>
     </div>
   </div>
@@ -649,7 +717,10 @@
       <div class="note">Short. Specific to their event. Curiosity drives the callback. No pitch.</div>
       <div class="line">
         <div class="speaker">Scott</div>
-        <div class="speech">"Hey [Name], this is Scott with Old Pueblo Restroom Trailers. I'm calling because we have a better solution than a plastic box for restrooms at [event]. Give me a call back at (520) 975-1914."</div>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name], this is Scott with Old Pueblo Restroom Trailers. I'm calling because we have a better solution than a plastic box for restrooms at [event]. Give me a call back at (520) 975-1914."</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name], this is Scott with Old Pueblo Restroom Trailers. I'm calling because we have a better solution than a plastic box for restrooms at [event]. Give me a call back at (520) 975-1914.">Copy</button>
+        </div>
       </div>
     </div>
   </div>
@@ -665,19 +736,31 @@
     <div class="section-body">
       <div class="followup-item">
         <div class="followup-day">Day 0 — same hour as voicemail</div>
-        <div class="speech">"Hey [Name], Scott with Old Pueblo — just tried you about [event]. Give me a call when you get a chance: (520) 975-1914."</div>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name], Scott with Old Pueblo — just tried you about [event]. Give me a call when you get a chance: (520) 975-1914."</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name], Scott with Old Pueblo — just tried you about [event]. Give me a call when you get a chance: (520) 975-1914.">Copy</button>
+        </div>
       </div>
       <div class="followup-item">
         <div class="followup-day">Day 2 — no response</div>
-        <div class="speech">"Hey [Name], Scott again. Wanted to connect before [event] gets too close. (520) 975-1914."</div>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name], Scott again. Wanted to connect before [event] gets too close. (520) 975-1914."</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name], Scott again. Wanted to connect before [event] gets too close. (520) 975-1914.">Copy</button>
+        </div>
       </div>
       <div class="followup-item">
         <div class="followup-day">Day 5</div>
-        <div class="speech">"Hey [Name] — Scott with Old Pueblo. Still trying to connect about [event] before it gets too close. (520) 975-1914."</div>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name] — Scott with Old Pueblo. Still trying to connect about [event] before it gets too close. (520) 975-1914."</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name] — Scott with Old Pueblo. Still trying to connect about [event] before it gets too close. (520) 975-1914.">Copy</button>
+        </div>
       </div>
       <div class="followup-item">
         <div class="followup-day">Day 10 — final</div>
-        <div class="speech">"Hey [Name], last reach out from Scott at Old Pueblo. If you're all set no worries — just let me know. (520) 975-1914."</div>
+        <div class="copy-row">
+          <div class="speech">"Hey [Name], last reach out from Scott at Old Pueblo. If you're all set no worries — just let me know. (520) 975-1914."</div>
+          <button class="copy-btn" onclick="copyText(this)" data-copy="Hey [Name], last reach out from Scott at Old Pueblo. If you're all set no worries — just let me know. (520) 975-1914.">Copy</button>
+        </div>
       </div>
     </div>
   </div>
@@ -687,6 +770,18 @@
 <footer>Old Pueblo Restroom Trailers · (520) 975-1914</footer>
 
 <script>
+function copyText(btn) {
+  navigator.clipboard.writeText(btn.dataset.copy).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'Copied';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove('copied');
+    }, 1200);
+  });
+}
+
 function toggle(header) {
   const body = header.nextElementSibling;
   const chevron = header.querySelector('.chevron');
